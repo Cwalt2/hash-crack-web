@@ -1,0 +1,6 @@
+
+helo
+hello
+this is not a word
+sentence
+clap
