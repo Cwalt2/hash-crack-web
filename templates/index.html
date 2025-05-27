@@ -1,27 +1,64 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Hash Generator</title>
+  <title>Hash Cracker</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+
+    input,
+    select {
+      margin: 8px 0;
+      padding: 5px;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .result {
+      margin-top: 20px;
+      background: #f4f4f4;
+      padding: 10px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Generate Hash</h1>
-  <form method="POST">
-    <label>Enter Plaintext:</label><br>
-    <input type="text" name="plaintext"><br><br>
+  <div class="container">
+    <h2>🔐 Hash Cracker Tool</h2>
+    <form method="POST">
+      <label for="hash">Enter Hash:</label>
+      <input type="text" name="hash" required>
 
-    <label>Select Algorithm:</label><br>
-    <select name="algorithm">
-      <option value="md5">MD5</option>
-      <option value="sha1">SHA1</option>
-      <option value="sha256">SHA256</option>
-    </select><br><br>
+      <label for="algorithm">Select Algorithm:</label>
+      <select name="algorithm" required>
+        <option value="md5">MD5</option>
+        <option value="sha1" selected>SHA1</option>
+        <option value="sha256">SHA256</option>
+      </select>
 
-    <input type="submit" value="Hash it!">
-  </form>
+      <label for="wordlist">Wordlist File:</label>
+      <select name="wordlist" required>
+        <option value="word1.txt">word1.txt</option>
+        <!-- Add more files as needed -->
+      </select>
 
-  {% if hashed %}
-    <h2>Result:</h2>
-    <p><strong>Hashed Output:</strong> {{ hashed }}</p>
-  {% endif %}
+      <input type="submit" value="Crack Hash">
+    </form>
+
+    {% if result %}
+    <div class="result">
+      <h3>Result:</h3>
+      <p>{{ result }}</p>
+    </div>
+    {% endif %}
+  </div>
 </body>
+
 </html>

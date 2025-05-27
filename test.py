@@ -1,6 +1,8 @@
 import hashlib
 
-f2 = "wordlists/word1.txt"
+filepath = "wordlists/word1.txt"
+hashWord = "helo" # this is supposed to be secret
+
 
 # --- Hashing Function ---
 def hash_string(text: str, algorithm: str = "md5") -> str:
@@ -15,20 +17,21 @@ def hash_string(text: str, algorithm: str = "md5") -> str:
     else:
         return "Unsupported algorithm."
 
-hashWord = "helo" # this is supposed to be secret
 hash = (hash_string(hashWord, "sha1"))
-
 print("hash input is", hash)
 
-with open('wordlists/word1.txt', 'r') as file:
-    for line in file:
-        a = [line.strip() for line in file]
+def  crack_hash(hash: str, filepath: str = "wordlists/word1.txt"):
+    with open(filepath, 'r') as file:
+        for line in file:
+            words = [line.strip() for line in file]
 
-        for i in a:
-            cracked = hash_string(i, "sha1")
+            for word in words:
+                cracked = hash_string(word, "sha1")
 
-            if cracked == hash:
-                print("Cracked!", cracked, "password is", i)
-            else:
-                continue
-            
+                if cracked == hash:
+                    print("Cracked!", cracked, "password is", word)
+                else:
+                    continue
+
+print(crack_hash(hash, "wordlists/word1.txt"))
+
